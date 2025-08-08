@@ -132,17 +132,17 @@ class DuosidaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     @staticmethod
     @callback
-    def async_get_options_flow(config_entry):
+    def async_get_options_flow(config_entry) -> DuosidaOptionsFlow:
         """Get the options flow for this handler."""
-        return DuosidaOptionsFlow(config_entry)
+        return DuosidaOptionsFlow()
 
 
 class DuosidaOptionsFlow(config_entries.OptionsFlow):
     """Handle Duosida options."""
 
-    def __init__(self, config_entry):
+    def __init__(self) -> None:
         """Initialize Duosida options flow."""
-        self.config_entry = config_entry
+        self._conf_app_id: str | None = None
 
     async def async_step_init(self, user_input=None):
         """Manage the options."""
